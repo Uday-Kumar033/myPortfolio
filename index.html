@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Uday Kumar | DevOps & Cloud Engineer Portfolio</title>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<!-- Inter Font -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+</style>
+<style>
+  /* Reset & base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  :root {
+    --color-primary: #10b981; /* emerald */
+    --color-primary-dark: #065f46;
+    --color-primary-light: #6ee7b7;
+    --color-secondary: #2563eb; /* blue */
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --background: #f9fafb;
+    --card-bg: #ffffffee;
+    --card-shadow: rgba(16, 185, 129, 0.2);
+    --blur-bg: rgba(255 255 255 / 0.5);
+    --border-radius: 12px;
+    --gap: 24px;
+  }
+  body[data-theme="dark"] {
+    --color-primary: #34d399;
+    --color-primary-dark: #064e3b;
+    --color-primary-light: #a7f3d0;
+    --color-secondary: #3b82f6;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --background: #111827;
+    --card-bg: rgba(17, 24, 39, 0.8);
+    --card-shadow: rgba(52, 211, 153, 0.3);
+    --blur-bg: rgba(17 24 39 / 0.6);
+  }
+  /* Layout */
+  .container {
+    max-width: 1200px;
+    padding: 0 24px;
+    margin: 0 auto;
+  }
+  h1, h2, h3, h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.4em;
+    font-weight: 700;
+  }
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  a:hover, a:focus {
+    color: var(--color-primary-dark);
+  }
+  button {
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    background: var(--blur-bg);
+    backdrop-filter: saturate(180%) blur(10px);
+    box-shadow: 0 2px 8px var(--card-shadow);
+    z-index: 1000;
+  }
+  header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+  .logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  nav ul {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  nav ul li a {
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+  }
+  nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    left: 0;
+    bottom: -4px;
+    transition: 0.3s ease;
+    border-radius: 2px;
+  }
+  nav ul li a:hover::after,
+  nav ul li a:focus::after,
+  nav ul li a.active::after {
+    width: 100%;
+  }
+  /* Hero Section */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 120px 16px 80px;
+    gap: 24px;
+  }
+  .hero h1 {
+    font-size: 3.25rem;
+    max-width: 600px;
+    line-height: 1.1;
+  }
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 640px;
+  }
+  .btn-primary {
+    padding: 14px 32px;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+    color: white;
+    border: none;
+    box-shadow: 0 4px 24px var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px var(--card-shadow);
+  }
+  /* Section Headings */
+  section {
+    padding: 80px 16px 80px;
+  }
+  section h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 48px;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+    gap: 32px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .skill-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px var(--card-shadow);
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    backdrop-filter: saturate(180%) blur(12px);
+    transition: transform 0.3s ease;
+  }
+  .skill-card:hover,
+  .skill-card:focus-within {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 40px var(--card-shadow);
+  }
+  .skill-icon {
+    font-size: 40px;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+  }
+  .skill-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+  /* Skill proficiency bar */
+  .proficiency-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--text-secondary);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .proficiency-level {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 6px 0 0 6px;
+    transition: width 1.2s ease;
+  }
+  /* Projects Section */
+  .projects-filter {
+    max-width: 800px;
+    margin: 0 auto 48px auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .filter-button {
+    font-weight: 600;
+    background: var(--card-bg);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    padding: 8px 20px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+  }
+  .filter-button.active,
+  .filter-button:hover,
+  .filter-button:focus {
+    background: var(--color-primary);
+    color: white;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .project-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 6px 24px var(--card-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .project-card:hover,
+  .project-card:focus-within {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 40px var(--card-shadow);
+  }
+  .project-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .project-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    flex-grow: 0;
+  }
+  .project-description {
+    flex-grow: 1;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+  .project-tech {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .tech-tag {
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 12px;
+    user-select: none;
+  }
+  .project-links {
+    margin-top: 20px;
+    display: flex;
+    gap: 24px;
+  }
+  .project-links a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--color-primary);
+    transition: color 0.2s ease;
+  }
+  .project-links a:hover,
+  .project-links a:focus {
+    color: var(--color-primary-dark);
+  }
+  /* Modal */
+  #modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000;
+  }
+  #modal.show {
+    display: flex;
+  }
+  #modal .modal-content {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    max-width: 780px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px 32px;
+    position: relative;
+    box-shadow: 0 10px 48px var(--card-shadow);
+    animation: popupEnter 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  @keyframes popupEnter {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  #modal .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 36px;
+    color: var(--color-primary);
+    cursor: pointer;
+    line-height: 1;
+    user-select: none;
+  }
+  #modal .modal-title {
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  #modal .modal-description {
+    margin-bottom: 24px;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  #modal .modal-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  #modal .modal-project-image {
+    max-width: 100%;
+    border-radius: var(--border-radius);
+    margin-bottom: 24px;
+  }
+  #modal .modal-links a {
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-right: 20px;
+  }
+  #modal .modal-links a:hover,
+  #modal .modal-links a:focus {
+    color: var(--color-primary-dark);
+  }
+  /* Experience Timeline */
+  .timeline {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 24px;
+    bottom: 0;
+    width: 4px;
+    background: var(--color-primary-light);
+    border-radius: 4px;
+  }
+  .timeline-item {
+    position: relative;
+    padding-left: 64px;
+    margin-bottom: 48px;
+  }
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 16px;
+    width: 22px;
+    height: 22px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    border: 4px solid var(--blur-bg);
+  }
+  .timeline-item h3 {
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .timeline-item time {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+  }
+  .timeline-item p {
+    margin-top: 8px;
+    color: var(--text-secondary);
+  }
+  /* Blog Section Placeholder */
+  .blog-placeholder {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+  /* Resume Section */
+  .resume-section {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .resume-section a.download-btn {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 16px;
+    background: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+  }
+  .resume-section a.download-btn:hover,
+  .resume-section a.download-btn:focus {
+    background: var(--color-primary-dark);
+  }
+  
+  /* Technologies Infographic */
+  .tech-infographic {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 48px 32px;
+    box-shadow: 0 6px 24px var(--card-shadow);
+    backdrop-filter: saturate(180%) blur(12px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 48px;
+  }
+  .tech-item {
+    flex: 1 1 160px;
+    max-width: 180px;
+    text-align: center;
+  }
+  .tech-icon {
+    font-size: 48px;
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    border-radius: 50%;
+    width: 88px;
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 16px var(--card-shadow);
+  }
+  .tech-label {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+  /* Footer */
+  footer {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 40px 16px 32px;
+    font-size: 0.9rem;
+  }
+  .profile-picture {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+  /* Responsive */
+  @media (max-width:768px) {
+    .hero h1 {
+      font-size: 2.25rem;
+    }
+    nav ul {
+      gap: 16px;
+    }
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    .skills-grid {
+      grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+    }
+    .timeline {
+      max-width: 100%;
+      padding-left: 24px;
+    }
+    .timeline::before {
+      left: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="container" role="banner">
+    <div class="logo" tabindex="0">Uday Kumar</div>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#aboutme">About Me</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><button id="theme-toggle" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode" style="background:none;border:none;color:var(--color-primary);font-size:28px;cursor:pointer;line-height:1;">&#9788;</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Home / Hero Section -->
+  <section class="hero" id="home" tabindex="-1" aria-label="Introduction">
+    <h1>Hi, I’m Uday Kumar, a passionate DevOps and Cloud Engineer.</h1>
+    <p>I specialize in driving seamless automation, optimizing cloud infrastructures, and accelerating software delivery cycles. I build scalable and reliable CI/CD pipelines leveraging cutting-edge cloud services and automation tools.</p>
+    <a href="#projects" class="btn-primary" role="button" tabindex="0">View My Projects</a>
+  </section>
+
+<!-- About Me Section -->
+<section id="aboutme" tabindex="-1" aria-labelledby="about-heading">
+  <h2 id="about-heading">About Me</h2>
+  <div class="container" style="max-width:900px;text-align:center;line-height:1.7; color: var(--text-secondary);">
+      <!-- Profile Picture -->
+      <img src="Pictures/Profile.jpg" alt="Profile Picture of Uday Kumar" class="profile-picture" style="border-radius: 50%; width: 150px; height: 150px; margin-bottom: 20px;" />
+      <p>Hello! I'm Uday Kumar, with a strong foundation in Application Support and expertise in building Continuous Integration & Continuous Delivery (CI/CD) pipelines. I thrive on transforming manual processes into efficient automated workflows using Terraform, Docker, Kubernetes, Jenkins, and Ansible.</p>
+      <p>Committed to continuous improvement, I’m always eager to learn and explore new technologies that drive DevOps innovation.</p>
+  </div>
+
+
+    <h2 style="margin-top:60px;">Key Expertise</h2>
+    <div class="skills-grid" role="list" aria-label="Skills and expertise">
+      <div class="skill-card" role="listitem" tabindex="0">
+        <span class="material-icons skill-icon" aria-hidden="true">cloud</span>
+        <div class="skill-name">Cloud Platforms</div>
+        <div>AWS, GCP</div>
+        <div class="proficiency-bar" aria-label="Skill proficiency"><div class="proficiency-level" style="width: 90%;"></div></div>
+      </div>
+      <div class="skill-card" role="listitem" tabindex="0">
+        <span class="material-icons skill-icon" aria-hidden="true">build_circle</span>
+        <div class="skill-name">Automation & IaC</div>
+        <div>Terraform, Ansible</div>
+        <div class="proficiency-bar" aria-label="Skill proficiency"><div class="proficiency-level" style="width: 85%;"></div></div>
+      </div>
+      <div class="skill-card" role="listitem" tabindex="0">
+        <span class="material-icons skill-icon" aria-hidden="true">sync_alt</span>
+        <div class="skill-name">CI/CD</div>
+        <div>Jenkins</div>
+        <div class="proficiency-bar" aria-label="Skill proficiency"><div class="proficiency-level" style="width: 90%;"></div></div>
+      </div>
+      <div class="skill-card" role="listitem" tabindex="0">
+        <span class="material-icons skill-icon" aria-hidden="true">widgets</span>
+        <div class="skill-name">Containerization</div>
+        <div>Docker, Kubernetes</div>
+        <div class="proficiency-bar" aria-label="Skill proficiency"><div class="proficiency-level" style="width: 95%;"></div></div>
+      </div>
+      <div class="skill-card" role="listitem" tabindex="0">
+        <span class="material-icons skill-icon" aria-hidden="true">dashboard</span>
+        <div class="skill-name">Monitoring & Logging</div>
+        <div>Grafana, CloudWatch</div>
+        <div class="proficiency-bar" aria-label="Skill proficiency"><div class="proficiency-level" style="width: 80%;"></div></div>
+      </div>
+      <div class="skill-card" role="listitem" tabindex="0">
+        <span class="material-icons skill-icon" aria-hidden="true">code</span>
+        <div class="skill-name">Version Control & SCM</div>
+        <div>Git, GitHub, AWS CodeCommit</div>
+        <div class="proficiency-bar" aria-label="Skill proficiency"><div class="proficiency-level" style="width: 85%;"></div></div>
+      </div>
+      <div class="skill-card" role="listitem" tabindex="0">
+        <span class="material-icons skill-icon" aria-hidden="true">terminal</span>
+        <div class="skill-name">Scripting & Automation</div>
+        <div>Shell Scripting, Python</div>
+        <div class="proficiency-bar" aria-label="Skill proficiency"><div class="proficiency-level" style="width: 90%;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" tabindex="-1" aria-labelledby="projects-heading">
+    <h2 id="projects-heading">Projects</h2>
+    <div class="projects-filter" role="region" aria-label="Filter projects by technology">
+      <button class="filter-button active" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-button" data-filter="terraform" aria-pressed="false">Terraform</button>
+      <button class="filter-button" data-filter="docker" aria-pressed="false">Docker</button>
+      <button class="filter-button" data-filter="kubernetes" aria-pressed="false">Kubernetes</button>
+      <button class="filter-button" data-filter="jenkins" aria-pressed="false">Jenkins</button>
+      <button class="filter-button" data-filter="ansible" aria-pressed="false">Ansible</button>
+      <button class="filter-button" data-filter="automation" aria-pressed="false">Automation</button>
+    </div>
+    <div class="projects-grid" role="list" aria-live="polite" aria-relevant="additions removals" aria-label="Project listings">
+      <!-- Project Cards -->
+      <article class="project-card" data-tech="terraform automation" role="listitem" tabindex="0" aria-describedby="proj1-desc">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ccc09191-9602-41cb-9b92-730855cc370e.png" alt="Terraform Infrastructure Deployment Diagram with Cloud Icons" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title" id="proj1-title">Infrastructure as Code with Terraform</h3>
+          <p class="project-description" id="proj1-desc">Automated cloud infrastructure deployments on AWS using Terraform, enabling scalable and repeatable provisioning.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Terraform</span>
+            <span class="tech-tag">AWS</span>
+            <span class="tech-tag">Automation</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Uday-Kumar033/Terraform/tree/main/Terraform_Tutorial/project-aws-terraform" target="_blank" rel="noopener noreferrer" aria-label="View Terraform project repository on GitHub">
+              <span class="material-icons">code</span> GitHub
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card" data-tech="docker kubernetes automation" role="listitem" tabindex="0" aria-describedby="proj2-desc">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/69383235-6d2f-4920-9b9b-44797f73c522.png" alt="Containers Diagram with Docker and Kubernetes Icons" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title" id="proj2-title">Container Orchestration</h3>
+          <p class="project-description" id="proj2-desc">Managed Docker containerization and Kubernetes orchestration for scalable microservices deployment and zero downtime upgrades.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">Automation</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/yourusername/docker-k8s-project" target="_blank" rel="noopener noreferrer" aria-label="View Docker and Kubernetes project repository on GitHub">
+              <span class="material-icons">code</span> GitHub
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card" data-tech="jenkins cicd automation" role="listitem" tabindex="0" aria-describedby="proj3-desc">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e3068947-7525-4288-9030-8af403ab9ef7.png" alt="Jenkins CI/CD Pipeline Illustration with Automation Icons" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title" id="proj3-title">CI/CD Pipelines with Jenkins</h3>
+          <p class="project-description" id="proj3-desc">Designed and implemented Jenkins pipelines for Continuous Integration and Delivery to automate software deployments and testing.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Jenkins</span>
+            <span class="tech-tag">CI/CD</span>
+            <span class="tech-tag">Automation</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/yourusername/jenkins-cicd" target="_blank" rel="noopener noreferrer" aria-label="View Jenkins CI/CD project repository on GitHub">
+              <span class="material-icons">code</span> GitHub
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card" data-tech="ansible automation" role="listitem" tabindex="0" aria-describedby="proj4-desc">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/79e3e308-71ea-489d-a7d9-bf1893683fb6.png" alt="Ansible Automation Playbook Illustration with Gear and Script Icons" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title" id="proj4-title">Configuration Management with Ansible</h3>
+          <p class="project-description" id="proj4-desc">Automated complex deployments and configuration management with Ansible playbooks to improve system consistency and uptime.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Ansible</span>
+            <span class="tech-tag">Automation</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/yourusername/ansible-automation" target="_blank" rel="noopener noreferrer" aria-label="View Ansible project repository on GitHub">
+              <span class="material-icons">code</span> GitHub
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card" data-tech="python shell scripting automation" role="listitem" tabindex="0" aria-describedby="proj5-desc">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f60e84ec-3c48-456c-8192-a63e2000ae39.png" alt="Python Script Code Snippet on a Dark Background" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title" id="proj5-title">Scripting & Automation</h3>
+          <p class="project-description" id="proj5-desc">Developed automation scripts using Python and Shell scripting to simplify repetitive system and deployment tasks.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Shell Scripting</span>
+            <span class="tech-tag">Automation</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/yourusername/automation-scripts" target="_blank" rel="noopener noreferrer" aria-label="View scripting project repository on GitHub">
+              <span class="material-icons">code</span> GitHub
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" tabindex="-1" aria-labelledby="experience-heading">
+    <h2 id="experience-heading">Experience</h2>
+    <div class="timeline" role="list" aria-label="Professional Experience Timeline">
+      <!-- <article class="timeline-item" role="listitem" tabindex="0">
+        <h3>Senior DevOps Engineer - XYZ Tech Solutions</h3>
+        <time datetime="2021-03">March 2021 - Present</time>
+        <p>Lead the automation of cloud infrastructure provisioning and management with Terraform and Ansible. Developed CI/CD pipelines using Jenkins to accelerate release cycles.</p>
+      </article>
+      <article class="timeline-item" role="listitem" tabindex="0">
+        <h3>Cloud Engineer - ABC Cloud Services</h3>
+        <time datetime="2018-07">July 2018 - February 2021</time>
+        <p>Built and maintained containerized microservices in Kubernetes clusters. Spearheaded migration projects to AWS and GCP cloud environments.</p>
+      </article>
+      <article class="timeline-item" role="listitem" tabindex="0">
+        <h3>Application Support Engineer - TechCorp</h3>
+        <time datetime="2015-01">January 2015 - June 2018</time>
+        <p>Provided L2/L3 support to cloud and on-prem applications, monitored system health, and automated routine support tasks using scripting.</p>
+      </article> -->
+      <p class="blog-placeholder" tabindex="0">I am Freasher now.</p>
+    </div>
+  </section>
+
+  <!-- Blog Section Placeholder -->
+  <section id="blog" tabindex="-1" aria-labelledby="blog-heading">
+    <h2 id="blog-heading">Blog</h2>
+    <p class="blog-placeholder" tabindex="0">Blog coming soon! Stay tuned for technical articles and tutorials on DevOps, cloud automation, and more.</p>
+  </section>
+
+  <!-- Resume Section -->
+  <section id="resume" tabindex="-1" aria-labelledby="resume-heading">
+    <h2 id="resume-heading">Resume</h2>
+    <div class="resume-section">
+      <p>Download my latest resume to learn more about my experience and skills.</p>
+      <a href="https://drive.google.com/file/d/1Y0beHHWs6ovh0VtHPJRDFFjjKzwB1bzq/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="download-btn" aria-label="Download Resume PDF">
+        <span class="material-icons">download</span> Download Resume
+      </a>
+    </div>
+  </section>
+
+
+  <!-- Technologies Infographic Section -->
+  <section id="technologies" tabindex="-1" aria-labelledby="tech-heading">
+    <h2 id="tech-heading">Technologies & Tools</h2>
+    <div class="tech-infographic" role="list" aria-label="Technologies used by Uday Kumar">
+      <div class="tech-item" role="listitem" tabindex="0">
+        <span class="material-icons tech-icon" aria-hidden="true">cloud</span>
+        <div class="tech-label">AWS & GCP</div>
+      </div>
+      <div class="tech-item" role="listitem" tabindex="0">
+        <span class="material-icons tech-icon" aria-hidden="true">code</span>
+        <div class="tech-label">Terraform</div>
+      </div>
+      <div class="tech-item" role="listitem" tabindex="0">
+        <span class="material-icons tech-icon" aria-hidden="true">settings_ethernet</span>
+        <div class="tech-label">Ansible</div>
+      </div>
+      <div class="tech-item" role="listitem" tabindex="0">
+        <span class="material-icons tech-icon" aria-hidden="true">sync_alt</span>
+        <div class="tech-label">Jenkins</div>
+      </div>
+      <div class="tech-item" role="listitem" tabindex="0">
+        <span class="material-icons tech-icon" aria-hidden="true">widgets</span>
+        <div class="tech-label">Docker & Kubernetes</div>
+      </div>
+      <div class="tech-item" role="listitem" tabindex="0">
+        <span class="material-icons tech-icon" aria-hidden="true">analytics</span>
+        <div class="tech-label">Grafana & CloudWatch</div>
+      </div>
+      <div class="tech-item" role="listitem" tabindex="0">
+        <span class="material-icons tech-icon" aria-hidden="true">storage</span>
+        <div class="tech-label">Git, GitHub & CodeCommit</div>
+      </div>
+      <div class="tech-item" role="listitem" tabindex="0">
+        <span class="material-icons tech-icon" aria-hidden="true">terminal</span>
+        <div class="tech-label">Shell & Python Scripting</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2024 Uday Kumar. All rights reserved.</p>
+</footer>
+
+<!-- Project Modal -->
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
+  <div class="modal-content" tabindex="0">
+    <button class="modal-close" aria-label="Close modal">&times;</button>
+    <h3 id="modal-title" class="modal-title">Project Title</h3>
+    <img class="modal-project-image" src="" alt="" />
+    <p id="modal-description" class="modal-description"></p>
+    <div class="modal-tech"></div>
+    <div class="modal-links"></div>
+  </div>
+</div>
+
+<script>
+  // Theme toggle
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const currentTheme = localStorage.getItem('theme');
+
+  if (currentTheme === 'dark') {
+    document.body.setAttribute('data-theme', 'dark');
+    themeToggleBtn.textContent = '☀️';
+  } else if (currentTheme === 'light') {
+    document.body.setAttribute('data-theme', 'light');
+    themeToggleBtn.textContent = '🌙';
+  } else if (prefersDarkScheme.matches) {
+    document.body.setAttribute('data-theme', 'dark');
+    themeToggleBtn.textContent = '☀️';
+  }
+
+  themeToggleBtn.addEventListener('click', () => {
+    const theme = document.body.getAttribute('data-theme');
+    if (theme === 'dark') {
+      document.body.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+      themeToggleBtn.textContent = '🌙';
+    } else {
+      document.body.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      themeToggleBtn.textContent = '☀️';
+    }
+  });
+
+  // Project filter logic
+  const filterButtons = document.querySelectorAll('.filter-button');
+  const projects = document.querySelectorAll('.project-card');
+
+  function setFilter(filter) {
+    projects.forEach(proj => {
+      const techs = proj.dataset.tech.split(' ');
+      if (filter === 'all' || techs.includes(filter)) {
+        proj.style.display = 'flex';
+      } else {
+        proj.style.display = 'none';
+      }
+    });
+    filterButtons.forEach(btn => {
+      btn.setAttribute('aria-pressed', btn.dataset.filter === filter ? 'true' : 'false');
+      btn.classList.toggle('active', btn.dataset.filter === filter);
+    });
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => setFilter(btn.dataset.filter));
+  });
+
+  // Initialize with "all"
+  setFilter('all');
+
+  // Modal logic
+  const modal = document.getElementById('modal');
+  const modalTitle = modal.querySelector('#modal-title');
+  const modalDescription = modal.querySelector('#modal-description');
+  const modalImage = modal.querySelector('.modal-project-image');
+  const modalTech = modal.querySelector('.modal-tech');
+  const modalLinks = modal.querySelector('.modal-links');
+  const modalCloseBtn = modal.querySelector('.modal-close');
+
+  projects.forEach(project => {
+    project.addEventListener('click', () => {
+      const title = project.querySelector('.project-title').textContent;
+      const description = project.querySelector('.project-description').textContent;
+      const imgSrc = project.querySelector('.project-image').src;
+      const imgAlt = project.querySelector('.project-image').alt;
+      const techItems = Array.from(project.querySelectorAll('.tech-tag')).map(t => t.textContent);
+      const links = Array.from(project.querySelectorAll('.project-links a')).map(a => ({
+        href: a.href,
+        label: a.textContent.trim(),
+        icon: a.querySelector('.material-icons').textContent
+      }));
+
+      modalTitle.textContent = title;
+      modalDescription.textContent = description;
+      modalImage.src = imgSrc;
+      modalImage.alt = imgAlt;
+
+      modalTech.innerHTML = '';
+      techItems.forEach(tech => {
+        const span = document.createElement('span');
+        span.className = 'tech-tag';
+        span.textContent = tech;
+        modalTech.appendChild(span);
+      });
+
+      modalLinks.innerHTML = '';
+      links.forEach(link => {
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.innerHTML = `<span class="material-icons">${link.icon}</span> ${link.label}`;
+        modalLinks.appendChild(a);
+      });
+
+      modal.classList.add('show');
+      modal.querySelector('.modal-content').focus();
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  modalCloseBtn.addEventListener('click', () => {
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  });
+  // Keyboard accessibility for modal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape" && modal.classList.contains('show')) {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  });
+
+</script>
+</body>
+</html>
+
